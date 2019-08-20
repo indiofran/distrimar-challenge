@@ -23,6 +23,6 @@ class OfficeController extends Controller
 		return response()->json($offices);
 	}
 	public function show(Request $request,Office $office){
-		return response()->json($office->load($request->input('rel', []));
+		return response()->json($office->load($request->input('rel', [])));
 	}
 }
