@@ -17,12 +17,27 @@ class OfficeController extends Controller
     {
         //
     }
+	public function index(Request $request){
+		try {
+			$offices = Office::with($request->input('rel', []))->paginate((int)$request->input('cant', 10), ['*'], 'p');
+			$response = $offices;
+			$code = 200;
+		}catch (\Exception $e){
+			$response = $e->getMessage();
+			$code = 500;
+		}
+		return response()->json($response,$code);
 
-    public function index(Request $request){
-		$offices = Office::with($request->input('rel', []))->paginate($request->input('cant',10),['*'],'p');
-		return response()->json($offices);
 	}
-	public function show(Request $request,Office $office){
-		return response()->json($office->load($request->input('rel', [])));
+	public function show(Request $request,$id){
+		try {
+			$office = Office::findOrFail($id);
+			$response = $office->load($request->input('rel', []));
+			$code = 200;
+		}catch (\Exception $e){
+			$response = $e->getMessage();
+			$code = 404;
+		}
+		return response()->json($response,$code);
 	}
 }

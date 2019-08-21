@@ -18,13 +18,27 @@ class DepartmentController extends Controller
         //
     }
 
-    public function index(Request $request){
+	public function index(Request $request){
+		try {
+			$departments = Department::with($request->input('rel', []))->paginate((int)$request->input('cant', 10), ['*'], 'p');
+			$response = $departments;
+			$code = 200;
+		}catch (\Exception $e){
+			$response = $e->getMessage();
+			$code = 500;
+		}
+		return response()->json($response,$code);
 
-		$departments = Department::with($request->input('rel', []))->paginate($request->input('cant',10),['*'],'p');
-
-		return response()->json($departments);
 	}
-	public function show(Request $request, Department $department){
-		return response()->json($department->load($request->input('rel', [])));
+	public function show(Request $request,$id){
+		try {
+			$department = Department::findOrFail($id);
+			$response = $department->load($request->input('rel', []));
+			$code = 200;
+		}catch (\Exception $e){
+			$response = $e->getMessage();
+			$code = 404;
+		}
+		return response()->json($response,$code);
 	}
 }

@@ -1,21 +1,73 @@
-# Lumen PHP Framework
+# Employee API
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+This is a challegen for the company Distrimar. This Exercise is an API for share all information about of employee from a Database
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## Requirements
 
-## Official Documentation
+- PHP 7.1 or greater (version 3.x and below supports PHP 5.5+)
+- PHP JSON extension enabled.
+- PHP pdo_sqlite extension enabled.
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+## Features
 
-## Security Vulnerabilities
+This have a HTTP Server with six endpoints:
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+- Return the employees.
+- Return a employee.
+- Return the offices.
+- Return a office.
+- Return the departments.
+- Return a department.
 
-## License
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Installation
+
+1.**Install dependencies**
+
+If you don't have composer installed, type:
+
+```php
+php composer.phar install
+```
+
+or if you have composer
+
+```php
+composer install
+```
+
+2. **Run App**
+
+```sh
+cd public\
+php -S localhost:8000
+```
+
+## EndPoints
+
+
+| URI | Method | Params |
+| --------- | --------- | --------- 
+| /employees | GET | p,rel[],cant
+| /employees/{employee_id} | GET | rel[]
+| /departments | GET | rel[]
+| /departments/{department_id}| GET | p,rel[],cant
+| /offices| GET | rel[]
+| /offices/{office_id}| GET | p,rel[],cant
+
+p = The number page of pagination. Default 1
+
+cant = The number quantity of object per page. Default 10
+
+rel[] = An array of relationships. Default empty array
+
+##Test
+
+To run the test:
+in windows:
+``` .\vendor\bin\phpunit```
+
+
+**IMPORTANT NOTE**
+
+Remember that all data store in sqlite file. ```\database\empleados.sqlite```
