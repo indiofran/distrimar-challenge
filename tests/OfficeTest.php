@@ -61,7 +61,7 @@ class EmployeeTest extends TestCase
 	{
 		$rels = array(
 			array('employees'),
-			array('employees.department'),
+			array('employees.department','employees.manager'),
 			array('employees.manager'),
 		);
 		foreach ($rels as $rel){
